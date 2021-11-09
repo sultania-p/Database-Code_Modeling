@@ -81,5 +81,16 @@ INSERT INTO [dbo].[Product]  VALUES (4, 'Small Desk','Cherry',220,8);
 INSERT into [dbo].[CUSTOMER_MA] select * from dbo.CUSTOMER where CustomerState = 'MA';
 
 
+select CustomerState, count(*) C from CUSTOMER
+group by CustomerState
+order by C
 
+select CustomerCity, count(*) City_Count from CUSTOMER
+group by CustomerCity
+
+ALTER TABLE CUSTOMER ALTER COLUMN CustomerState varchar(50);
+
+ALTER TABLE CUSTOMER ADD CustomerCountry varchar(50);
+ALTER TABLE CUSTOMER drop column CustomerCountry ;
+--------
 

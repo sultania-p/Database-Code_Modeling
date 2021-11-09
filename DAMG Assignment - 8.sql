@@ -196,3 +196,4 @@ SELECT DISTINCT Q.FacultyID, F.FacultyName FROM QUALIFIED Q
 JOIN COURSE C on C.CourseID = Q.CourseID
 JOIN FACULTY F ON Q.FacultyID = F.FacultyID
 where CourseName not in ('Syst Analysis','Syst Design')
+
