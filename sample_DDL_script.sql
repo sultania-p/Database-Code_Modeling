@@ -1,4 +1,4 @@
-/*
+
 -- iF DATABASE EXISTS, DROP
 IF EXISTS (SELECT name FROM sys.databases WHERE name = N'sample')
     DROP DATABASE sample
@@ -119,69 +119,7 @@ INSERT INTO works_on (emp_no ,project_no ,job ,enter_date) VALUES ('15006','p7',
 INSERT INTO works_on (emp_no ,project_no ,job ,enter_date) VALUES ('15007','p1','Data Architect','1/4/2022');
 INSERT INTO works_on (emp_no ,project_no ,job ,enter_date) VALUES ('15008','p2','DBA','1/3/2023');
 
-*/
 
-USE [DAMG6210]
-GO
-
-ALTER TABLE [dbo].[ORDER] DROP CONSTRAINT [CustomerID_FK]
-GO
-
-ALTER TABLE [dbo].[ORDER]  WITH CHECK ADD  CONSTRAINT [CustomerID_FK] FOREIGN KEY([CustomerID])
-REFERENCES [dbo].[CUSTOMER] ([CustomerID])
-GO
-
-ALTER TABLE [dbo].[ORDER] CHECK CONSTRAINT [CustomerID_FK]
-GO
-
-
-select * from employee where dept_no='D1';
-select * from employee where dept_no in ('D1','D2') and emp_no<15002;
-select * from [dbo].[project] where budget>=100000;
-select * from [dbo].[project] where budget>=90000 and budget <=303750;
-select * from [dbo].[project] where budget between 90000 and 303750;
-select * from [dbo].[project] where budget not between 100000 and 150000;
-select min(budget) as minimum, max(budget) as maximum, avg(budget) as average, cast(avg(budget) as decimal(20,2)) as average_rounding
-	from [dbo].[project] ;
-select * from employee where dept_no<>'D1';
-select distinct emp_lname  from employee;
-select  emp_lname  from employee group by emp_lname; -- use distinct always for getting unique records..
-select dept_no, count(*) emp_count from [dbo].[employee] group by dept_no having count(*)>=3
-select * from [dbo].[works_on] where project_no = 'p2' and job is null;
-select * from employee where emp_fname like '_a%';
-select * from employee where substring(emp_fname,2,2) like 'a%';
-select * from [dbo].[department] where location like '[C-F]%';
-select * from employee;
-select * from project;
-select * from [dbo].[works_on];
-
-select emp_fname,emp_lname,job--,d.location
-from employee e
---inner join department d on e.dept_no=d.dept_no
-left join works_on w on e.emp_no=w.emp_no
-
-select emp_fname,emp_lname,budget,project_name
-from employee e
- join works_on w on e.emp_no=w.emp_no
- join [dbo].[project] p on p.project_no = w.project_no
-where budget >140000;
-
-select emp_fname,emp_lname,budget,project_name, dept_name
-from employee e
-left join works_on w on e.emp_no=w.emp_no
-left join [dbo].[project] p on p.project_no = w.project_no
-left join department d on e.dept_no = d.dept_no
-where dept_name = 'Finance';
-/*
-Write a SQL query that outputs a list of employees who work in the ‘Finance’ department along with their job title, enter date, project name, and budget. 
-(see list of columns from sample output below).  
-You must show all employees that work in the ‘Finance” department even if they didn’t work on any project.  You must submit both your query and an image of the output.
-*/
-
-select * from [dbo].[works_on];
-select * from [dbo].[department];
-select * from [dbo].[employee];
-select * from [dbo].[project];
 
 
 
